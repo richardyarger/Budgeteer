@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="1" failures="0" hostname="richs-mbp" name="com.rich.AccountServiceSpec" tests="1" time="24.436" timestamp="2014-05-26T01:19:30">
+  <properties />
+  <testcase classname="com.rich.AccountServiceSpec" name="test something" time="24.409">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:128)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate.execute(GrailsTransactionTemplate.groovy:57)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at com.rich.AccountServiceSpec.test something(AccountServiceSpec.groovy:32)
+</error>
+  </testcase>
+  <system-out><![CDATA[--Output from test something--
+]]></system-out>
+  <system-err><![CDATA[--Output from test something--
+]]></system-err>
+</testsuite>

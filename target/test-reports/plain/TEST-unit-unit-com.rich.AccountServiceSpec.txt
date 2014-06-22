@@ -1,0 +1,18 @@
+Testsuite: com.rich.AccountServiceSpec
+Tests run: 1, Failures: 0, Errors: 1, Time elapsed: 24.436 sec
+------------- Standard Output ---------------
+--Output from test something--
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from test something--
+------------- ---------------- ---------------
+
+Testcase: test something took 24.371 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:128)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate.execute(GrailsTransactionTemplate.groovy:57)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at com.rich.AccountServiceSpec.test something(AccountServiceSpec.groovy:32)
+
