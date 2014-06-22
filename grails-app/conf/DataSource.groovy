@@ -20,7 +20,7 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			username = "root"
 			password = "password"
-			url = "jdbc:mysql://localhost/checks"
+			url = "jdbc:mysql://localhost/budgeteer"
 			dialect="org.hibernate.dialect.MySQL5Dialect"
 			logSql = true
 		}
