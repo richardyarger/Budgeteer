@@ -22,7 +22,7 @@ environments {
 			password = "password"
 			url = "jdbc:mysql://localhost/budgeteer"
 			dialect="org.hibernate.dialect.MySQL5Dialect"
-			logSql = true
+			logSql = false
 		}
     }
     test {

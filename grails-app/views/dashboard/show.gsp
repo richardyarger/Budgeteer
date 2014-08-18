@@ -38,7 +38,7 @@
 	                    </tbody>
 	                </table>
 				</div>
-				
+			<h1>Budget from ${budgetStart} to ${budgetEnd}</h1>	
 			<div class="budgetTable">
 					<table>
 	                    <thead>
