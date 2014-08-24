@@ -14,6 +14,7 @@ class Transaction {
 	double amount
 	boolean isCredit
 	Account account
+	Long pennies
 	
     static constraints = {
 		description(blank:false, nullable:false, minSize:1, maxSize:50)
@@ -23,6 +24,12 @@ class Transaction {
 		type(blank:false, nullable:false)
 		amount(blank:false, nullable:false)
 		isCredit(blank:false, nullable:false)
+		pennies(nullable:true,display:false)
     }
 	
+	public void setAmount(double amount){
+		println "setAmount($amount)"
+		this.amount = amount
+		this.pennies = amount*100
+	}
 }

@@ -26,10 +26,10 @@
 	                    <tbody>
 	             		<g:each in="${debits}" var="item">
 			                    <tr>                    	
-			                    	<td><g:dateFormat format='MM/dd/yyyy' date='${item.transactionDate}'/></td>
+			                    	<td><g:formatDate format='MM/dd/yyyy' date='${item.transactionDate}'/></td>
 			                    	<td><%= item.description %></td>
 			                    	<td><%= item.type.name %></td>
-			                    	<td><%= item.amount %></td>
+			                    	<td><g:dollar amount='${item.pennies}'/></td>
 			                    </tr>   
 	                    </g:each>         
 	                    </tbody>

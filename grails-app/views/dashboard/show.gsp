@@ -30,9 +30,9 @@
 			                    <tr>                    	
 			                    	<td><%= item.value.monthStr %></td>
 			                    	<td><%= item.value.account %></td>
-			                    	<td><%= item.value.credits %></td>
-			                    	<td><g:link action="debitsByDateBudget" id="${item.value.monthIdx}"><%= item.value.debits %></g:link></td>
-			                    	<td><g:diff value1="${item.value.debits}" value2="${item.value.credits}"/></td>
+			                    	<td><g:dollar amount="${item.value.credits}"/></td>
+			                    	<td><g:link action="debitsByDateBudget" id="${item.value.monthIdx}"><g:dollar amount="${item.value.debits}"/></g:link></td>
+			                    	<td><g:dollarDiff value1="${item.value.debits}" value2="${item.value.credits}"/></td>
 			                    </tr>   
 	                    </g:each>         
 	                    </tbody>

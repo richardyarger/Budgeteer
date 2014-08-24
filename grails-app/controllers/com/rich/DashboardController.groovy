@@ -37,7 +37,7 @@ class DashboardController {
 			
 			def credits = accountService.creditsByDate(startDate, endDate, account) ?: 0
 			def debits = accountService.debitsByDate(startDate, endDate, account) ?: 0
-			def balance = account.startingBalance + credits - debits
+			def balance = account.startingBalance + credits/100 - debits/100
 			
 			balanceByMonth.put monthStr, [monthStr:monthStr,monthIdx:monthIdx,account:account.name,credits:credits,debits:debits,balance:balance]
 		}
@@ -67,7 +67,7 @@ class DashboardController {
 		Budget[] budgets = Budget.list()
 		budgets.each{ budget ->
 			def debits = accountService.debitsByDate(startDate, endDate, account, null, budget) ?: 0
-			balanceByBudget.put(budget.name, [budget:budget.name,amount:budget.amount,debits:debits])
+			balanceByBudget.put(budget.name, [budget:budget.name,amount:budget.pennies,debits:debits])
 		}
 		render(view:'show', model:[balanceByMonth:balanceByMonth,balanceByBudget:balanceByBudget,
 			budgetStart:budgetStartDate,budgetEnd:budgetEndDate])

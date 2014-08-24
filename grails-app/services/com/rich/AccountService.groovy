@@ -24,7 +24,7 @@ class AccountService {
 				}
 			}
 			projections {
-				sum "amount"
+				sum "pennies"
 			}
 		}
     }
@@ -55,7 +55,7 @@ class AccountService {
 				groupBy?.each{
 					groupProperty(it)
 				}
-				sum "amount"
+				sum "pennies"
 			}
 		}
 	}
@@ -71,8 +71,8 @@ class AccountService {
 			}
 			projections {
 				groupProperty('category.budget')
-				sum 'amount'
-				property 'typebudget.amount'
+				sum 'pennies'
+				property 'typebudget.pennies'
 				property 'typebudget.id'
 			}
 		}

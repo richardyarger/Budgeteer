@@ -27,9 +27,9 @@
 	             		<g:each in="${debits}" var="item">
 			                    <tr>                    	
 			                    	<td><%= item[0] %></td>
-			                    	<td><g:link action="budgetDebitsByDate" params="[month:"${monthIdx}", budget:"${item[3]}"]" ><%= item[1] %></g:link></td>
-			                    	<td><%= item[2] %></td>
-			                    	<td><g:diff value1="${item[1]}" value2="${item[2]}"/></td>
+			                    	<td><g:link action="budgetDebitsByDate" params="[month:"${monthIdx}", budget:"${item[3]}"]" ><g:dollar amount='${item[1]}'/></g:link></td>
+			                    	<td><g:dollar amount='${item[2]}'/></td>
+			                    	<td><g:dollarDiff value1="${item[1]}" value2="${item[2]}"/></td>
 			                    </tr>   
 	                    </g:each>         
 	                    </tbody>
