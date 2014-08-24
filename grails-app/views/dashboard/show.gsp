@@ -52,8 +52,8 @@
 	             		<g:each in="${balanceByBudget}" var="item">
 			                    <tr>                    	
 			                    	<td><%= item.value.budget %></td>
-			                    	<td><%= item.value.amount %></td>
-			                    	<td><%= item.value.debits %></td>
+			                    	<td><g:dollar amount='${item.value.amount}'/></td>
+			                    	<td><g:dollar amount='${item.value.actual}'/></td>
 			                    </tr>   
 	                    </g:each>         
 	                    </tbody>

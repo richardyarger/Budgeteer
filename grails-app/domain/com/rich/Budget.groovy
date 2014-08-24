@@ -9,7 +9,7 @@ class Budget {
     static constraints = {
 		name(blank:false, nullable:false, minSize:1, maxSize:50)
 		amount(blank:false, nullable:false)
-		pennies(nullable:true)
+		pennies(display:false)
     }
 	
 	public String toString(){

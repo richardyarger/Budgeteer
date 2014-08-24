@@ -66,8 +66,8 @@ class DashboardController {
 		
 		Budget[] budgets = Budget.list()
 		budgets.each{ budget ->
-			def debits = accountService.debitsByDate(startDate, endDate, account, null, budget) ?: 0
-			balanceByBudget.put(budget.name, [budget:budget.name,amount:budget.pennies,debits:debits])
+			def actual = accountService.transactionQuery(startDate, endDate, null, null, account, null, budget) ?: 0
+			balanceByBudget.put(budget.name, [budget:budget.name,amount:budget.pennies,actual:actual])
 		}
 		render(view:'show', model:[balanceByMonth:balanceByMonth,balanceByBudget:balanceByBudget,
 			budgetStart:budgetStartDate,budgetEnd:budgetEndDate])

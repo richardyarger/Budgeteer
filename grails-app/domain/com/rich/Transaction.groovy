@@ -24,7 +24,7 @@ class Transaction {
 		type(blank:false, nullable:false)
 		amount(blank:false, nullable:false)
 		isCredit(blank:false, nullable:false)
-		pennies(nullable:true,display:false)
+		pennies(display:false)
     }
 	
 	public void setAmount(double amount){

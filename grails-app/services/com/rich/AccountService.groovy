@@ -6,45 +6,24 @@ import grails.transaction.Transactional
 class AccountService {
 
     def creditsByDate(Date startDate, Date endDate=new Date(), Account accountParam=null, Category categoryParam=null, Budget budgetParam=null) {
-		def c = Transaction.createCriteria()
-		def currentMonthIn = c.get {
-			and {
-				eq "isCredit", true
-				between "transactionDate", startDate, endDate
-				if(accountParam){
-					eq "account", accountParam
-				}
-				if(categoryParam){
-					eq "category", categoryParam
-				}
-				if(budgetParam){
-					category{
-						eq 'budget', budgetParam
-					}
-				}
-			}
-			projections {
-				sum "pennies"
-			}
-		}
+		return transactionQuery(startDate, endDate, null, true, accountParam, categoryParam, budgetParam)
     }
 	
     def debitsByDate(Date startDate, Date endDate=new Date(), Account accountParam=null, Category categoryParam=null, Budget budgetParam=null) {
-    	return debitsQuery(startDate, endDate, null, accountParam, categoryParam, budgetParam)
+    	return transactionQuery(startDate, endDate, null, false, accountParam, categoryParam, budgetParam)
 	}
 	
-	def debitsQuery(Date startDate, Date endDate=new Date(), String[] groupBy, Account accountParam=null, Category categoryParam=null, Budget budgetParam=null) {
+	def transactionQuery(Date startDate, Date endDate=new Date(), String[] groupBy, Boolean isCredit=null, Account accountParam=null, Category categoryParam=null, Budget budgetParam=null) {
 		def c = Transaction.createCriteria()
 		def currentMonthOut = c.get {
 			and {
-				eq "isCredit", false
 				between "transactionDate", startDate, endDate
-				if(accountParam){
+				if(isCredit != null)
+					eq "isCredit", isCredit
+				if(accountParam)
 					eq "account", accountParam
-				}
-				if(categoryParam){
+				if(categoryParam)
 					eq "category", categoryParam
-				}
 				if(budgetParam){
 					type {
 						eq 'budget', budgetParam
