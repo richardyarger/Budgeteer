@@ -11,25 +11,25 @@
 	        <g:if test="${flash.message}">
 	            <div class="message">${flash.message}</div>
 	         </g:if>  
-	       <h1>Debits from ${startDate} to ${endDate}</h1>	
+	       <h1>${budget.name} Debits from ${startDate} to ${endDate}</h1>	
                         
 			<div class="debitsTable">
 					<table>
 	                    <thead>
 	                    	<tr>
-	                        	<th>Category</th>
+	                    		<th>Date</th>
+	                        	<th>Description</th>
+	                        	<th>Category></th>
 	                        	<th>Amount</th>
-	                        	<th>Budget</th>
-	                        	<th>Difference</th>
 	                        </tr>	                    
 	                    </thead>
 	                    <tbody>
 	             		<g:each in="${debits}" var="item">
 			                    <tr>                    	
-			                    	<td><%= item[0] %></td>
-			                    	<td><g:link action="budgetDebitsByDate" params="[month:"${monthIdx}", budget:"${item[3]}"]" ><%= item[1] %></g:link></td>
-			                    	<td><%= item[2] %></td>
-			                    	<td><g:diff value1="${item[1]}" value2="${item[2]}"/></td>
+			                    	<td><g:dateFormat format='MM/dd/yyyy' date='${item.transactionDate}'/></td>
+			                    	<td><%= item.description %></td>
+			                    	<td><%= item.type.name %></td>
+			                    	<td><%= item.amount %></td>
 			                    </tr>   
 	                    </g:each>         
 	                    </tbody>

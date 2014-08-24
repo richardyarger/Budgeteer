@@ -30,6 +30,10 @@ class AccountService {
     }
 	
     def debitsByDate(Date startDate, Date endDate=new Date(), Account accountParam=null, Category categoryParam=null, Budget budgetParam=null) {
+    	return debitsQuery(startDate, endDate, null, accountParam, categoryParam, budgetParam)
+	}
+	
+	def debitsQuery(Date startDate, Date endDate=new Date(), String[] groupBy, Account accountParam=null, Category categoryParam=null, Budget budgetParam=null) {
 		def c = Transaction.createCriteria()
 		def currentMonthOut = c.get {
 			and {
@@ -48,7 +52,41 @@ class AccountService {
 				}
 			}
 			projections {
+				groupBy?.each{
+					groupProperty(it)
+				}
 				sum "amount"
+			}
+		}
+	}
+	
+	def debitsByBudget(Date startDate, Date endDate=new Date()) {
+		def c = Transaction.createCriteria()
+		def currentMonthOut = c.list {
+			createAlias("type","category")
+			createAlias("type.budget","typebudget")
+			and {
+				eq "isCredit", false
+				between "transactionDate", startDate, endDate
+			}
+			projections {
+				groupProperty('category.budget')
+				sum 'amount'
+				property 'typebudget.amount'
+				property 'typebudget.id'
+			}
+		}
+	}
+	
+	def budgetDebits(def budgetId, Date startDate, Date endDate=new Date()) {
+		def c = Transaction.createCriteria()
+		def currentMonthOut = c.list {
+			and {
+				eq 'isCredit', false
+				between 'transactionDate', startDate, endDate
+				type{
+					eq 'budget.id', budgetId
+				}
 			}
 		}
 	}

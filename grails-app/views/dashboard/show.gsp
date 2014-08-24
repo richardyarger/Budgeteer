@@ -28,11 +28,11 @@
 	                    <tbody>
 	             		<g:each in="${balanceByMonth}" var="item">
 			                    <tr>                    	
-			                    	<td><%= item.value.month %></td>
+			                    	<td><%= item.value.monthStr %></td>
 			                    	<td><%= item.value.account %></td>
 			                    	<td><%= item.value.credits %></td>
-			                    	<td><%= item.value.debits %></td>
-			                    	<td><%= item.value.balance %></td>
+			                    	<td><g:link action="debitsByDateBudget" id="${item.value.monthIdx}"><%= item.value.debits %></g:link></td>
+			                    	<td><g:diff value1="${item.value.debits}" value2="${item.value.credits}"/></td>
 			                    </tr>   
 	                    </g:each>         
 	                    </tbody>
