@@ -3,17 +3,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />       
         <title>Account Dashboard</title>
-        <script>        	
- 		</script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     </head>
     <body>
     	<div class="body">
 	        <g:if test="${flash.message}">
 	            <div class="message">${flash.message}</div>
 	         </g:if>  
+	       
+	       <%
+			    def columns = [['string', 'Month'], ['number', 'Credits'], ['number', 'Debits']]
+				def data = balanceByMonth.values().collect{[it["monthStr"],(it["credits"]/100), (it["debits"]/100)] }
+		   %>
+	       <gvisualization:lineCoreChart elementId="monthlyLineChart" columns="${columns}" data="${data}"/>
+	       <div id="monthlyLineChart"></div>
+	         
 	       <h1>Details</h1>
-                        
-            
 			<div class="monthTable">
 					<table>
 	                    <thead>

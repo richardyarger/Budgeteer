@@ -3,8 +3,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />       
         <title>Debits</title>
-        <script>        	
- 		</script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     </head>
     <body>
 		<div class="body">
@@ -32,7 +31,18 @@
 	                    </tbody>
 	                </table>
 				</div>
-                     
+            
+           <%
+			    def descColumns = [['string', 'Description'], ['number', 'Amount']]
+				def catColumns = [['string', 'Category'], ['number', 'Amount']]
+				def descData = debitByDescription
+			 	def catData = debitByCategory
+		   %>
+	       <gvisualization:pieCoreChart elementId="debitByCategoryPieChart" is3D="${true}" columns="${catColumns}" data="${catData}"/>
+	       <div id="debitByCategoryPieChart"></div>
+	       <gvisualization:pieCoreChart elementId="debitByDescPieChart" is3D="${true}" columns="${descColumns}" data="${descData}"/>
+	       <div id="debitByDescPieChart"></div>
+	               
 			<div class="debitsTable">
 					<table>
 	                    <thead>

@@ -12,7 +12,7 @@ class DashboardController {
 		Account account = Account.findById(1)
 		def balanceByMonth = [:]
 		
-		(0..5).each{ idx ->
+		(5..0).each{ idx ->
 			Calendar today = Calendar.getInstance()
 			
 			/* Always show budget from 20th to the 20th */
@@ -41,6 +41,11 @@ class DashboardController {
 			
 			balanceByMonth.put monthStr, [monthStr:monthStr,monthIdx:monthIdx,account:account.name,credits:credits,debits:debits,balance:balance]
 		}
+		
+		println "balanceByMonth"
+		println balanceByMonth
+		println "values "+balanceByMonth.values()
+		println balanceByMonth.values().collect{[it["monthStr"],it["debits"]] }
 		
 		def balanceByBudget = [:]
 		Calendar today = Calendar.getInstance()
@@ -132,6 +137,25 @@ class DashboardController {
 		def debitTotal = budgetDebits.sum{ it.pennies }
 		println "debitTotal = $debitTotal"
 		
-		render(view:'budgetDebits', model:[budget:budget, debitTotal:debitTotal, debits:budgetDebits, startDate:startDateStr, endDate:endDateStr])
+		def debitByCategory = []
+		def categories = budgetDebits.collect{ it.type } as Set
+		categories.each { category ->
+			def myDebits = budgetDebits.findAll{ it.type == category }
+			def sum = myDebits.sum{ it.pennies }
+			debitByCategory << [category, sum/100]
+		}
+		println "debitByCategory = $debitByCategory"
+		
+		def debitByDescription = []
+		def descriptions = budgetDebits.collect{ it.description } as Set
+		descriptions.each { description ->
+			def myDebits = budgetDebits.findAll{ it.description == description }
+			def sum = myDebits.sum{ it.pennies }
+			debitByDescription << [description, sum/100]
+		}
+		println "debitByDescription = $debitByDescription"
+		
+		render(view:'budgetDebits', model:[budget:budget, debitTotal:debitTotal, debits:budgetDebits, debitByCategory:debitByCategory, 
+			debitByDescription:debitByDescription, startDate:startDateStr, endDate:endDateStr])
 	}
 }
