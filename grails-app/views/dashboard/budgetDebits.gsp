@@ -12,14 +12,34 @@
 	            <div class="message">${flash.message}</div>
 	         </g:if>  
 	       <h1>${budget.name} Debits from ${startDate} to ${endDate}</h1>	
-                        
+           <div class="debitsTable">
+					<table>
+	                    <thead>
+	                    	<tr>
+	                        	<th>Category</th>
+	                        	<th>Amount</th>
+	                        	<th>Budget</th>
+	                        	<th>Difference</th>
+	                        </tr>	                    
+	                    </thead>
+	                    <tbody>
+	             		<tr>                    	
+	                    	<td>${budget.name}</td>
+	                    	<td><g:dollar amount='${debitTotal}'/></td>
+	                    	<td><g:dollar amount='${budget.pennies}'/></td>
+	                    	<td><g:dollarDiff value1="${debitTotal}" value2="${budget.pennies}"/></td>
+	                    </tr>   
+	                    </tbody>
+	                </table>
+				</div>
+                     
 			<div class="debitsTable">
 					<table>
 	                    <thead>
 	                    	<tr>
 	                    		<th>Date</th>
 	                        	<th>Description</th>
-	                        	<th>Category></th>
+	                        	<th>Category</th>
 	                        	<th>Amount</th>
 	                        </tr>	                    
 	                    </thead>

@@ -90,6 +90,7 @@ class DashboardController {
 		def endDateStr = endDate.format(BUDGET_DATE_FORMAT)
 		println "Debits from $startDate to $endDate"
 		
+		//returns array of [budget name, actual, budget amount, budget id] for each budget
 		def debitsByBudget = accountService.debitsByBudget(startDate, endDate) ?: 0
 		println "debitsByBudget = $debitsByBudget"
 		
@@ -128,6 +129,9 @@ class DashboardController {
 		def budgetDebits = accountService.budgetDebits(budget.id, startDate, endDate) ?: 0
 		println "budgetDebits = $budgetDebits"
 		
-		render(view:'budgetDebits', model:[budget:budget, debits:budgetDebits, startDate:startDateStr, endDate:endDateStr])
+		def debitTotal = budgetDebits.sum{ it.pennies }
+		println "debitTotal = $debitTotal"
+		
+		render(view:'budgetDebits', model:[budget:budget, debitTotal:debitTotal, debits:budgetDebits, startDate:startDateStr, endDate:endDateStr])
 	}
 }
