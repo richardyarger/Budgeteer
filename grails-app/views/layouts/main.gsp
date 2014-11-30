@@ -20,6 +20,13 @@
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
+		<div class="nav" role="navigation">
+			<ul>
+				<li><a class="home" href="/Budgeteer/dashboard">Home</a></li>
+				<li><a href="/Budgeteer/transaction/index" class="list">Transaction List</a></li>
+				<li><a href="/Budgeteer/transaction/create" class="create">New Transaction</a></li>
+			</ul>
+		</div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

@@ -12,7 +12,7 @@ class DashboardController {
 		Account account = Account.findById(1)
 		def balanceByMonth = [:]
 		
-		(0..2).each{ idx ->
+		(0..5).each{ idx ->
 			Calendar today = Calendar.getInstance()
 			
 			/* Always show budget from 20th to the 20th */
@@ -99,8 +99,17 @@ class DashboardController {
 	def budgetDebitsByDate() {
 		println params
 		def monthIdx = Integer.valueOf(params.month)
-		def budgetId = Long.valueOf(params.budget)
-		Budget budget = Budget.get(budgetId)
+		
+		Budget budget
+		if(params.budget){
+			def budgetId = Long.valueOf(params.budget)
+			budget = Budget.get(budgetId)
+		}else if(params.budgetName){
+				budget = Budget.findByName(params.budgetName)
+		}else{
+			flash.error = "No valid budget information was provided"
+			redirect(view:'budgetDebits')
+		}
 		
 		Calendar debitDay = Calendar.getInstance()
 		debitDay.clearTime()
@@ -116,7 +125,7 @@ class DashboardController {
 		def endDateStr = endDate.format(BUDGET_DATE_FORMAT)
 		println "Debits from $startDate to $endDate"
 		
-		def budgetDebits = accountService.budgetDebits(budgetId, startDate, endDate) ?: 0
+		def budgetDebits = accountService.budgetDebits(budget.id, startDate, endDate) ?: 0
 		println "budgetDebits = $budgetDebits"
 		
 		render(view:'budgetDebits', model:[budget:budget, debits:budgetDebits, startDate:startDateStr, endDate:endDateStr])

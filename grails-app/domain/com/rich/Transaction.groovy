@@ -15,6 +15,7 @@ class Transaction {
 	boolean isCredit
 	Account account
 	Long pennies
+	Date dateCreated
 	
     static constraints = {
 		description(blank:false, nullable:false, minSize:1, maxSize:50)
